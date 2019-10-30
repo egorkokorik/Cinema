@@ -14,7 +14,7 @@ class Cinemaparser:
         """This function extracts raw content"""
         main_page_url = "https://msk.subscity.ru"
         get_main_page_response = r.get(main_page_url)
-        self.content = bs(get_main_page_response.text, "html.parser")
+        self.content = bs(get_main_page_response.text, 'html.parser')
 
     def print_raw_content(self):
         """This function displays self.content on the screen"""
@@ -24,9 +24,9 @@ class Cinemaparser:
         """This function return list of films"""
         list_of_all_films = list()
         all_films = self.content.find_all("div", class_="movie-plate")
-        i = 0
         for film in all_films:
-            i = i + 1
-            if i != 1:
-                list_of_all_films.append(film["attr-title"])
+            list_of_all_films.append(film["attr-title"])
         return list_of_all_films[1:-1]
+CI_MO = Cinemaparser('msk')
+CI_MO.extract_raw_content()
+CI_MO.get_films_list()
